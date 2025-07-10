@@ -15,6 +15,8 @@ class Parking extends Model
         'is_active',
     ];
 
+    protected $with = ['user', 'reservations'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

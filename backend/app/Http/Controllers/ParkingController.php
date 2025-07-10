@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parking;
+use App\Http\Resources\ParkingResource;
 use App\Http\Requests\StoreParkingRequest;
 use App\Http\Requests\UpdateParkingRequest;
 
@@ -13,7 +14,9 @@ class ParkingController extends Controller
      */
     public function index()
     {
-        return response()->json(Parking::all(), 200);
+        return ParkingResource::collection(
+            Parking::paginate(20)
+        )->response();
     }
 
     /**
@@ -22,9 +25,11 @@ class ParkingController extends Controller
     public function store(StoreParkingRequest $request)
     {
         $validated = $request->validated();
-        $record = Parking::create($validated);
+        $parking = Parking::create($validated);
 
-        return response()->json($record, 201);
+        return ParkingResource::make(
+            $parking
+        )->response()->setStatusCode(201);
     }
 
     /**
@@ -32,19 +37,17 @@ class ParkingController extends Controller
      */
     public function show(Parking $parking)
     {
-        return response()->json($parking, 200);
+        return ParkingResource::make($parking)->response();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateParkingRequest $request, string $id)
+    public function update(UpdateParkingRequest $request, Parking $parking)
     {
         $validated = $request->validated();
-        $parking = Parking::findOrFail($id);
         $parking->update($validated);
-
-        return response()->json($parking, 200);
+        return ParkingResource::make($parking)->response();
     }
 
     /**
