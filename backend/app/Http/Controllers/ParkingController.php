@@ -15,7 +15,7 @@ class ParkingController extends Controller
     public function index()
     {
         return ParkingResource::collection(
-            Parking::paginate(20)
+            Parking::with(['reservations'])->paginate(20)
         )->response();
     }
 
@@ -25,10 +25,10 @@ class ParkingController extends Controller
     public function store(StoreParkingRequest $request)
     {
         $validated = $request->validated();
-        $parking = Parking::create($validated);
+        $parking = Parking::create($validated)->refresh();
 
         return ParkingResource::make(
-            $parking
+            $parking->fresh()
         )->response()->setStatusCode(201);
     }
 
@@ -37,7 +37,9 @@ class ParkingController extends Controller
      */
     public function show(Parking $parking)
     {
-        return ParkingResource::make($parking)->response();
+        return ParkingResource::make(
+            $parking->load(['reservations'])
+        )->response();
     }
 
     /**
@@ -47,7 +49,9 @@ class ParkingController extends Controller
     {
         $validated = $request->validated();
         $parking->update($validated);
-        return ParkingResource::make($parking)->response();
+        return ParkingResource::make(
+            $parking->fresh()->load(['reservations'])
+        )->response();
     }
 
     /**

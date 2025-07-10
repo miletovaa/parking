@@ -15,7 +15,7 @@ class Parking extends Model
         'is_active',
     ];
 
-    protected $with = ['user', 'reservations'];
+    protected $with = ['user'];
 
     public function user()
     {
