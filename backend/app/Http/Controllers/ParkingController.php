@@ -6,16 +6,18 @@ use App\Models\Parking;
 use App\Http\Resources\ParkingResource;
 use App\Http\Requests\StoreParkingRequest;
 use App\Http\Requests\UpdateParkingRequest;
+use Illuminate\Http\Request;
 
 class ParkingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(?Request $request)
     {
+        $perPage = $request->query('per_page', default: 20);
         return ParkingResource::collection(
-            Parking::with(['reservations'])->paginate(20)
+            Parking::with(['reservations'])->paginate($perPage)
         )->response();
     }
 
