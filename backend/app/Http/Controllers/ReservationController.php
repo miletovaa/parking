@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class ReservationController extends Controller
     public function index(?Request $request)
     {
         $perPage = $request->query('per_page', default: 20);
-        return response()->json(Reservation::paginate($perPage), 200);
+        return ReservationResource::collection(
+            Reservation::paginate($perPage)
+        )->response();
     }
 
     /**
@@ -26,7 +29,9 @@ class ReservationController extends Controller
         $validated = $request->validated();
         $record = Reservation::create($validated);
 
-        return response()->json($record, 201);
+        return ReservationResource::make(
+            $record->fresh()
+        )->response()->setStatusCode(201);
     }
 
     /**
@@ -34,19 +39,19 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        return response()->json($reservation, 200);
+        return ReservationResource::make($reservation)->response();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateReservationRequest $request, string $id)
+    public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
         $validated = $request->validated();
-        $reservation = Reservation::findOrFail($id);
         $reservation->update($validated);
-
-        return response()->json($reservation, 200);
+        return ReservationResource::make(
+            $reservation->fresh()
+        )->response();
     }
 
     /**

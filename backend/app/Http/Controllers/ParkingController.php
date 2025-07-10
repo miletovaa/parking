@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Parking;
+use App\Http\Resources\ParkingResource;
 use App\Http\Requests\StoreParkingRequest;
 use App\Http\Requests\UpdateParkingRequest;
+use Illuminate\Http\Request;
 
 class ParkingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(?Request $request)
     {
-        return response()->json(Parking::all(), 200);
+        $perPage = $request->query('per_page', default: 20);
+        return ParkingResource::collection(
+            Parking::with(['reservations'])->paginate($perPage)
+        )->response();
     }
 
     /**
@@ -22,9 +27,11 @@ class ParkingController extends Controller
     public function store(StoreParkingRequest $request)
     {
         $validated = $request->validated();
-        $record = Parking::create($validated);
+        $parking = Parking::create($validated)->refresh();
 
-        return response()->json($record, 201);
+        return ParkingResource::make(
+            $parking->fresh()
+        )->response()->setStatusCode(201);
     }
 
     /**
@@ -32,19 +39,21 @@ class ParkingController extends Controller
      */
     public function show(Parking $parking)
     {
-        return response()->json($parking, 200);
+        return ParkingResource::make(
+            $parking->load(['reservations'])
+        )->response();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateParkingRequest $request, string $id)
+    public function update(UpdateParkingRequest $request, Parking $parking)
     {
         $validated = $request->validated();
-        $parking = Parking::findOrFail($id);
         $parking->update($validated);
-
-        return response()->json($parking, 200);
+        return ParkingResource::make(
+            $parking->fresh()->load(['reservations'])
+        )->response();
     }
 
     /**

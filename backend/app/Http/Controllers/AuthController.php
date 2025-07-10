@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -46,7 +47,7 @@ class AuthController extends Controller
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
+            'user' => UserResource::make($user),
             'token' => $token,
         ]);
     }
@@ -58,7 +59,6 @@ class AuthController extends Controller
     }
 
     public function me(Request $request) {
-        $user = User::find($request->user()->id);
-        return response()->json($user);
+        return UserResource::make($request->user())->response();
     }
 }

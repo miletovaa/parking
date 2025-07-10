@@ -18,6 +18,8 @@ class Reservation extends Model
         'note',
     ];
 
+    protected $with = ['user', 'parking'];
+
     public function parking()
     {
         return $this->belongsTo(Parking::class);
