@@ -11,7 +11,15 @@ class UpdateReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $parking_id = $this->input('parking_id');
+        $reservation_id = $this->route('id');
+        $is_user_attached = $this->user()->parkings->contains($parking_id);
+        $is_client_attached = $this->user()->reservations->contains($reservation_id);
+
+        return $this->user()->isSuperAdmin()
+            || ($this->user()->hasRole('admin') && $is_user_attached)
+            || ($this->user()->hasRole('moderator') && $is_user_attached)
+            || ($this->user()->hasRole('client') && $is_client_attached);
     }
 
     /**

@@ -11,7 +11,13 @@ class StoreReservationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $parking_id = $this->input('parking_id');
+        $is_user_attached = $this->user()->parkings->contains($parking_id);
+
+        return $this->user()->isSuperAdmin()
+            || ($this->user()->hasRole('admin') && $is_user_attached)
+            || ($this->user()->hasRole('moderator') && $is_user_attached)
+            || $this->user()->hasRole('client');
     }
 
     /**
