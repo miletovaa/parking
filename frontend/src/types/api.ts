@@ -8,4 +8,8 @@ type DefaultParams = {
 
 type Payload = Record<string, any>
 
-export type { Id, DefaultParams, Payload }
+export type { 
+  Id, 
+  DefaultParams, 
+  Payload,
+}

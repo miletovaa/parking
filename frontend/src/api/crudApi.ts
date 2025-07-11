@@ -3,7 +3,8 @@ import { DefaultParams, Id, Payload } from '@/types/api'
 import { basicApi } from './basicApi'
 
 export const crudApi = (endpoint: string) => {
-    const { headers, url, handleRequest } = basicApi(endpoint)
+    const { headers, apiUrl, handleRequest } = basicApi()
+    const url = `${apiUrl}${endpoint}`
 
     const list = (params?: DefaultParams) =>
         handleRequest(axios.get(url, { headers, params }))

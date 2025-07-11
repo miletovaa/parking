@@ -1,12 +1,12 @@
 import { AxiosError } from 'axios'
 
-export const basicApi = (endpoint: string) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`
-    if (!url) {
+export const basicApi = () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL
+    if (!apiUrl) {
         throw new Error('API URL is not defined. Please check your environment variables.')
     }
 
-    const token = localStorage.getItem('token') || null
+    const token = localStorage.getItem('token') || '4|ESn1Q7t27LxuAKu3x2x0v2cM8wTWjM6ILYGn1gRU65bc2ce5'
     const headers = token
         ? { Authorization: `Bearer ${token}` }
         : {}
@@ -29,5 +29,5 @@ export const basicApi = (endpoint: string) => {
         }
     }
 
-    return { headers, url, handleRequest }
+    return { headers, apiUrl, handleRequest }
 }
