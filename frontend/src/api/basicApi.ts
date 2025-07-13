@@ -6,7 +6,7 @@ export const basicApi = () => {
         throw new Error('API URL is not defined. Please check your environment variables.')
     }
 
-    const token = localStorage.getItem('token') || '4|ESn1Q7t27LxuAKu3x2x0v2cM8wTWjM6ILYGn1gRU65bc2ce5'
+    const token = localStorage.getItem('token') || null
     const headers = token
         ? { Authorization: `Bearer ${token}` }
         : {}
