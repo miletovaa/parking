@@ -1,15 +1,18 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { authApi } from '@/api'
 import { LoginPayload } from '@/types/auth'
+import { useMeStore } from '@/providers/me-store-provider'
 
 export default function LoginPage() {
     const router = useRouter()
+    const setMe = useMeStore((s) => s.update)
 
     const schema = z.object({
         email: z.email(),
@@ -21,13 +24,16 @@ export default function LoginPage() {
         resolver: zodResolver(schema),
     })
 
-    const handleLogin = async (data: LoginPayload) => {
+    const handleLogin = useCallback(async (data: LoginPayload) => {
         const response = await authApi().login(data)
         const { user, token } = response
+
+        setMe(user)
         localStorage.setItem('token', token)
 
-        // TODO: routing based on user role
-    }
+        router.push('/') 
+        // TODO: or to profile page if present active reservations
+    }, [router])
 
     return (
         <div className="text-black flex min-h-screen items-center justify-center bg-gray-100">

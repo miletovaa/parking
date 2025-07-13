@@ -18,7 +18,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
-    "zod": "^4.0.5"
+    "react-icons": "^5.5.0",
+    "zod": "^4.0.5",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

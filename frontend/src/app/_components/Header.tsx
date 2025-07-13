@@ -1,10 +1,25 @@
 'use client'
+import { useRouter } from "next/navigation"
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react"
-import { use } from "react"
-import { authApi } from "@/api"
+import { TbLogout } from "react-icons/tb"
+
+import { authApi } from '@/api'
+import { useMeStore } from '@/providers/me-store-provider'
 
 export default function Header() {
-    const me = null // TODO: use(authApi().me())
+    const router = useRouter()
+
+    const me = useMeStore((store) => store.me)
+    const setMe = useMeStore((store) => store.update)
+
+    const logout = () => {
+        authApi().logout().then(() => {
+            setMe(null)
+            router.push("/login")
+        }).catch(error => {
+            console.error("Logout failed", error)
+        })
+    }
 
     return (
         <Navbar shouldHideOnScroll>
@@ -30,22 +45,30 @@ export default function Header() {
             </NavbarContent>
             <NavbarContent justify="end">
                 {me ? (
-                    <NavbarItem>
-                        <Link href="/profile">
-                            {/* {me.name} */}
-                        </Link>
-                    </NavbarItem>
-                ) : (
                     <>
                         <NavbarItem>
-                            <Link href="/login">Login</Link>
+                            <Link href="/profile">
+                                {me.name}
+                            </Link>
                         </NavbarItem>
                         <NavbarItem>
-                            <Button as={Link} color="primary" href="#" variant="flat">
-                                Sign Up
+                            <Button
+                                isIconOnly 
+                                color="primary" 
+                                variant="flat" 
+                                className="hover:text-primary" 
+                                onPress={logout}
+                            >
+                                <TbLogout />
                             </Button>
                         </NavbarItem>
                     </>
+                ) : (
+                    <NavbarItem>
+                        <Button as={Link} color="primary" href="/login" variant="flat">
+                            Login
+                        </Button>
+                    </NavbarItem>
                 )}
             </NavbarContent>
         </Navbar>

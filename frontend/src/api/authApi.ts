@@ -12,8 +12,10 @@ export const authApi = () => {
     const login = (data: LoginPayload): Promise<LoginResponse> =>
         handleRequest(axios.post(`${apiUrl}/login`, data, { headers }))
 
-    const logout = () =>
+    const logout = async () => {
+        localStorage.removeItem('token')
         handleRequest(axios.post(`${apiUrl}/logout`, {}, { headers }))
+    }
 
     const me = async () => {
         const response = await handleRequest<AxiosResponse<User>>(axios.get(`${apiUrl}/me`, { headers }))
