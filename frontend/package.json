@@ -9,13 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroui/react": "^2.8.0-beta.15",
     "@hookform/resolvers": "^5.1.1",
+    "@internationalized/date": "^3.8.2",
     "axios": "^1.10.0",
+    "framer-motion": "^12.23.3",
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.60.0",
-    "zod": "^4.0.5"
+    "react-icons": "^5.5.0",
+    "zod": "^4.0.5",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
