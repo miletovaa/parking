@@ -1,0 +1,27 @@
+{
+  "home": {
+    "stay_duration_label": "Durata del soggiorno",
+    "stay_duration_description": "Scegli un intervallo di date per la tua prenotazione",
+    "stay_duration_error": "Per favore, seleziona un intervallo di date valido.",
+    "submit": "Invia"
+  },
+  "header": {
+    "parking": "Parcheggio",
+    "reserve_a_spot": "Prenota un posto",
+    "price": "Prezzo",
+    "contacts": "Contatti",
+    "login": "Accedi",
+    "logout": "Esci",
+    "logout_failed": "Errore durante la disconnessione"
+  },
+  "auth": {
+    "login": "Accesso",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "sign_in_button": "Accedi"
+  },
+  "not_found": {
+    "title": "Pagina non trovata",
+    "description": "La pagina che stai cercando non esiste."
+  }
+}
