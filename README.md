@@ -30,32 +30,32 @@ A powerful, scalable multi‑tenant parking reservation and management system �
 
 ### For Parking Customers:
 
-  🧭  Quick, intuitive booking
+  - 🧭  Quick, intuitive booking
   
-  📧  Email verification for security
+  - 📧  Email verification for security
   
-  🧮  Pricing calculator
+  - 🧮  Pricing calculator
   
-  🌍  Multi-language support
+  - 🌍  Multi-language support
   
-  🧾  VAT invoice generation for legal entities
+  - 🧾  VAT invoice generation for legal entities
 
 
 ### For Parking Brands (Admin Users):
 
-  🗺️  Full parking management (pricing, extra services) with on-the-fly updates
+  - 🗺️  Full parking management (pricing, extra services) with on-the-fly updates
   
-  🛡️  Configurable service-level staff roles via Spatie Permissions
+  - 🛡️  Configurable service-level staff roles via Spatie Permissions
   
-  📬  Real-time notifications (Telegram, email) on new bookings for staff
+  - 📬  Real-time notifications (Telegram, email) on new bookings for staff
   
-  📈  Visualization of statistics (with an ability to compare brand locations’ effectivity)
+  - 📈  Visualization of statistics (with an ability to compare brand locations’ effectivity)
   
-  📊  Reports generation (PDF)
+  - 📊  Reports generation (PDF)
   
-  📅  Dynamic reservation dashboards: Today’s arrivals/departures, overdue alerts, financial reports
+  - 📅  Dynamic reservation dashboards: Today’s arrivals/departures, overdue alerts, financial reports
   
-  📝  Reservations CRUD, staff settings
+  - 📝  Reservations CRUD, staff settings
   <!-- Mass booking import via mailbox parsing -->
 
 
