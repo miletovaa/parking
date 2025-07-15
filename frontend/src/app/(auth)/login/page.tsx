@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { authApi } from '@/api'
 import { LoginPayload } from '@/types/auth'
 import { useMeStore } from '@/providers/me-store-provider'
+import { Button, Input, Divider, Card, CardHeader, CardBody, CardFooter } from '@heroui/react'
 
 export default function LoginPage() {
     const t = useTranslations('auth')
@@ -20,7 +21,7 @@ export default function LoginPage() {
         email: z.email(),
         // TODO: adjust password validation for prod
         password: z.string().min(4),
-    })
+    }).required()
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema),
@@ -33,40 +34,42 @@ export default function LoginPage() {
         setMe(user)
         localStorage.setItem('token', token)
 
-        router.push('/') 
+        router.push('/')
         // TODO: or to profile page if present active reservations
     }, [router])
 
     return (
-        <div className="text-black flex min-h-screen items-center justify-center bg-gray-100">
-            <form onSubmit={handleSubmit(handleLogin)} className="bg-white p-8 rounded shadow w-full max-w-md">
-                <h1 className="text-2xl font-semibold mb-6">{t('login')}</h1>
-
-                <input 
-                    {...register('email')}
-                    type="email"
-                    placeholder={t('email_placeholder')}
-                    className="w-full mt-4 px-4 py-2 border rounded"
-                    required
-                />
-                {errors.email && <span className="text-red-500">{errors.email.message}</span>}
-
-                <input
-                    {...register('password')} 
-                    type="password"
-                    placeholder={t('password_placeholder')}
-                    className="w-full mt-4 px-4 py-2 border rounded"
-                    required
-                />
-                {errors.password && <span className="text-red-500">{errors.password.message}</span>}
-
-                <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white mt-6 py-2 rounded hover:bg-blue-700"
-                >
-                    {t('sign_in_button')}
-                </button>
+        <Card className="max-w-md mx-auto mt-20">
+            <form onSubmit={handleSubmit(handleLogin)} >
+                <CardHeader className="flex justify-center">
+                    <h1 className="text-2xl font-bold">{t('login')}</h1>
+                </CardHeader>
+                <Divider />
+                <CardBody className="space-y-3 py-8">
+                    <Input
+                        {...register('email')}
+                        type="email"
+				        variant="underlined"
+                        placeholder={t('email_placeholder')}
+                        errorMessage={t('email_error')}
+                        isInvalid={!!errors.email}
+                    />
+                    <Input
+                        {...register('password')}
+                        type="password"
+                        variant="underlined"
+                        placeholder={t('password_placeholder')}
+                        errorMessage={t('password_error')}
+                        isInvalid={!!errors.password}
+                    />
+                </CardBody>
+                <Divider />
+                <CardFooter className="flex justify-end">
+                    <Button color="primary" type="submit">
+                        {t('sign_in_button')}
+                    </Button>
+                </CardFooter>
             </form>
-        </div>
+        </Card>
     )
 }
