@@ -1,11 +1,12 @@
 'use client'
 import { useRouter } from "next/navigation"
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@heroui/react"
-import { TbLogout } from "react-icons/tb"
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react"
+import { TbLogout, TbUser, TbLogin } from "react-icons/tb"
 import { useTranslations } from "next-intl"
 
 import { authApi } from '@/api'
 import { useMeStore } from '@/providers/me-store-provider'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Header() {
     const router = useRouter()
@@ -46,29 +47,39 @@ export default function Header() {
                 </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
+                <NavbarItem>
+                    <LanguageSwitcher />
+                </NavbarItem>
                 {me ? (
                     <>
                         <NavbarItem>
-                            <Link href="/profile">
-                                {me.name}
-                            </Link>
+                            <Button 
+                                isIconOnly 
+                                as={Link} 
+                                color="secondary" 
+                                href="/profile" 
+                                variant="flat"
+                                title={t('profile')}
+                            >
+                                <TbUser className="text-xl" />
+                            </Button>
                         </NavbarItem>
                         <NavbarItem>
                             <Button
                                 isIconOnly 
-                                color="primary" 
+                                color="secondary" 
                                 variant="flat" 
-                                className="hover:text-primary" 
                                 onPress={logout}
                                 title={t('logout')}
                             >
-                                <TbLogout />
+                                <TbLogout className="text-xl" />
                             </Button>
                         </NavbarItem>
                     </>
                 ) : (
                     <NavbarItem>
-                        <Button as={Link} color="primary" href="/login" variant="flat">
+                        <Button as={Link} color="secondary" href="/login" variant="flat">
+                            <TbLogin className="text-xl" />
                             {t('login')}
                         </Button>
                     </NavbarItem>
