@@ -10,7 +10,7 @@ interface Props { children: ReactNode }
 export default function AuthWrapper({ children }: Props) {
     const me = useMeStore((s) => s.me)
     const setMe = useMeStore((s) => s.update)
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function AuthWrapper({ children }: Props) {
                         return
                     }
                 } else {
-                    // router.push('/login')
+                    router.push('/login')
                     return
                 }
             }

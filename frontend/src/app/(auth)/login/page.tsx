@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -11,6 +12,7 @@ import { LoginPayload } from '@/types/auth'
 import { useMeStore } from '@/providers/me-store-provider'
 
 export default function LoginPage() {
+    const t = useTranslations('auth')
     const router = useRouter()
     const setMe = useMeStore((s) => s.update)
 
@@ -38,12 +40,12 @@ export default function LoginPage() {
     return (
         <div className="text-black flex min-h-screen items-center justify-center bg-gray-100">
             <form onSubmit={handleSubmit(handleLogin)} className="bg-white p-8 rounded shadow w-full max-w-md">
-                <h1 className="text-2xl font-semibold mb-6">Login</h1>
+                <h1 className="text-2xl font-semibold mb-6">{t('login')}</h1>
 
                 <input 
                     {...register('email')}
                     type="email"
-                    placeholder="Email"
+                    placeholder={t('email_placeholder')}
                     className="w-full mt-4 px-4 py-2 border rounded"
                     required
                 />
@@ -52,7 +54,7 @@ export default function LoginPage() {
                 <input
                     {...register('password')} 
                     type="password"
-                    placeholder="Password"
+                    placeholder={t('password_placeholder')}
                     className="w-full mt-4 px-4 py-2 border rounded"
                     required
                 />
@@ -62,7 +64,7 @@ export default function LoginPage() {
                     type="submit"
                     className="w-full bg-blue-600 text-white mt-6 py-2 rounded hover:bg-blue-700"
                 >
-                    Sign in
+                    {t('sign_in_button')}
                 </button>
             </form>
         </div>

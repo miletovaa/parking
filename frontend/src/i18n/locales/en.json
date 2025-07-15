@@ -1,0 +1,28 @@
+{
+  "home": {
+    "stay_duration_label": "Stay duration",
+    "stay_duration_description": "Choose a date range for your reservation",
+    "stay_duration_error": "Please select a valid date range.",
+    "submit": "Submit"
+  },
+  "header": {
+    "parking": "Parking",
+    "reserve_a_spot": "Reserve a spot",
+    "price": "Price",
+    "contacts": "Contacts",
+    "profile": "Profile",
+    "login": "Login",
+    "logout": "Logout",
+    "logout_failed": "Logout failed"
+  },
+  "auth": {
+    "login": "Login",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "sign_in_button": "Sign In"
+  },
+  "not_found": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist."
+  }
+}
