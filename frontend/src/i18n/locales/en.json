@@ -17,8 +17,13 @@
   },
   "auth": {
     "login": "Login",
-    "email_placeholder": "Email",
-    "password_placeholder": "Password",
+    "email_label": "Email",
+    "email_placeholder": "Enter your email",
+    "email_error": "Please enter a valid email address.",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
+    "password_error": "Password must be at least 6 characters long.",
+    "login_failed": "Login failed. Please check your credentials.",
     "sign_in_button": "Sign In"
   },
   "not_found": {
