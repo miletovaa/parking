@@ -58,7 +58,7 @@ export default function Header() {
                                 as={Link} 
                                 color="secondary" 
                                 href="/profile" 
-                                variant="flat"
+                                variant="bordered"
                                 title={t('profile')}
                             >
                                 <TbUser className="text-xl" />
@@ -68,7 +68,7 @@ export default function Header() {
                             <Button
                                 isIconOnly 
                                 color="secondary" 
-                                variant="flat" 
+                                variant="bordered" 
                                 onPress={logout}
                                 title={t('logout')}
                             >
@@ -78,9 +78,9 @@ export default function Header() {
                     </>
                 ) : (
                     <NavbarItem>
-                        <Button as={Link} color="secondary" href="/login" variant="flat">
+                        <Button as={Link} color="secondary" href="/login" variant="bordered">
                             <TbLogin className="text-xl" />
-                            {t('login')}
+                            <span className="font-semibold">{t('login')}</span>
                         </Button>
                     </NavbarItem>
                 )}

@@ -21,7 +21,7 @@ export default function LanguageSwitcher() {
                 <Button
                     isIconOnly
                     color="secondary"
-                    variant="flat"
+                    variant="bordered"
                     className="text-xl"
                 >
                     <TbLanguage />

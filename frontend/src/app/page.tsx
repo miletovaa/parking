@@ -22,7 +22,7 @@ export default function Home() {
 				isRequired
 			/>
 			<Button className="ml-4" variant="solid" color="primary">
-				{t('submit')}
+				<span className="font-semibold">{t('submit')}</span>
 			</Button>
 		</div>
 	)

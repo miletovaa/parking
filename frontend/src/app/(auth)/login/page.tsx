@@ -45,12 +45,14 @@ export default function LoginPage() {
                     <h1 className="text-2xl font-bold">{t('login')}</h1>
                 </CardHeader>
                 <Divider />
-                <CardBody className="space-y-3 py-8">
+                <CardBody className="space-y-1 py-2 text-xl">
                     <Input
                         {...register('email')}
                         type="email"
 				        variant="underlined"
-                        placeholder={t('email_placeholder')}
+                        color="primary"
+                        size="lg"
+                        label={t('email_label')}
                         errorMessage={t('email_error')}
                         isInvalid={!!errors.email}
                     />
@@ -58,7 +60,9 @@ export default function LoginPage() {
                         {...register('password')}
                         type="password"
                         variant="underlined"
-                        placeholder={t('password_placeholder')}
+                        color="primary"
+                        size="lg"
+                        label={t('password_label')}
                         errorMessage={t('password_error')}
                         isInvalid={!!errors.password}
                     />
@@ -66,7 +70,7 @@ export default function LoginPage() {
                 <Divider />
                 <CardFooter className="flex justify-end">
                     <Button color="primary" type="submit">
-                        {t('sign_in_button')}
+                        <span className="font-semibold">{t('sign_in_button')}</span>
                     </Button>
                 </CardFooter>
             </form>
