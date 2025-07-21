@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import { useTranslations } from "next-intl"
 import { DateRangePicker } from "@heroui/date-picker"
 import { Button } from "@heroui/button"
-import { getLocalTimeZone, today } from "@internationalized/date"
+import { getLocalTimeZone, today, parseDate } from "@internationalized/date";
 
 export default function Home() {
 	const todayDate = useMemo(() => today(getLocalTimeZone()), [])
@@ -19,6 +19,10 @@ export default function Home() {
 				variant="underlined"
 				minValue={todayDate}
 				errorMessage={t('stay_duration_error')}
+				defaultValue={{
+					start: todayDate,
+					end: todayDate.add({ days: 3 }),
+				}}
 				isRequired
 			/>
 			<Button className="ml-4" variant="solid" color="primary">
