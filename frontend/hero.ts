@@ -21,6 +21,7 @@ export default heroui({
                 warning: "#FFE734",
                 background: "#FAFEFF",
                 foreground: "#140D4F",
+                divider: "#E5E5E5",
             }
         },
         dark: {
@@ -39,7 +40,6 @@ export default heroui({
                 content1: "#141424", // modal's bg
                 divider: "#24243C", // divider
             }
-
         }
     }
 })

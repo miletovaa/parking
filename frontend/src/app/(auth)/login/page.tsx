@@ -39,17 +39,16 @@ export default function LoginPage() {
     }, [router])
 
     return (
-        <Card className="max-w-md mx-auto mt-20">
-            <form onSubmit={handleSubmit(handleLogin)} >
+        <form onSubmit={handleSubmit(handleLogin)}>
+            <Card className="max-w-md mx-auto mt-20 flex flex-col space-y-6 py-6">
                 <CardHeader className="flex justify-center">
                     <h1 className="text-2xl font-bold">{t('login')}</h1>
                 </CardHeader>
-                <Divider />
-                <CardBody className="space-y-1 py-2 text-xl">
+                <CardBody className="space-y-3 py-2 px-6 text-xl">
                     <Input
                         {...register('email')}
                         type="email"
-				        variant="underlined"
+                        variant="underlined"
                         color="primary"
                         size="lg"
                         label={t('email_label')}
@@ -67,13 +66,12 @@ export default function LoginPage() {
                         isInvalid={!!errors.password}
                     />
                 </CardBody>
-                <Divider />
-                <CardFooter className="flex justify-end">
+                <CardFooter className="flex justify-center">
                     <Button color="primary" type="submit">
-                        <span className="font-semibold">{t('sign_in_button')}</span>
+                        <span className="font-semibold uppercase px-6">{t('sign_in_button')}</span>
                     </Button>
                 </CardFooter>
-            </form>
-        </Card>
+            </Card>
+        </form>
     )
 }
