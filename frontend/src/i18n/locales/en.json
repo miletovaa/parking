@@ -29,5 +29,15 @@
   "not_found": {
     "title": "Page Not Found",
     "description": "The page you are looking for does not exist."
+  },
+  "reservation": {
+    "reservation_information": "Reservation Information",
+    "name": "Name",
+    "from": "From",
+    "to": "To",
+    "license_plate": "License Plate",
+    "license_plate_placeholder": "Ex. ABC1234",
+    "license_plate_required": "License plate is required.",
+    "continue": "Continue"
   }
 }
